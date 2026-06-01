@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('System Information') {
+            steps {
+                script {
+                    echo "===== JENKINS INFORMATION ====="
+                    echo "Job Name      : ${env.JOB_NAME}"
+                    echo "Build Number  : ${env.BUILD_NUMBER}"
+                    echo "Node Name     : ${env.NODE_NAME}"
+                    echo "Workspace     : ${env.WORKSPACE}"
+                }
+
+                sh '''
+                echo ""
+                echo "===== HOST DETAILS ====="
+                hostname
+                uname -a
+
+                echo ""
+                echo "===== CPU DETAILS ====="
+                lscpu
+
+                echo ""
+                echo "===== MEMORY DETAILS ====="
+                free -h
+
+                echo ""
+                echo "===== DISK DETAILS ====="
+                df -h
+
+                echo ""
+                echo "===== SYSTEM LOAD ====="
+                uptime
+
+                echo ""
+                echo "===== CPU USAGE ====="
+                top -bn1 | head -20
+
+                echo ""
+                echo "===== TOP MEMORY PROCESSES ====="
+                ps -eo pid,user,%cpu,%mem,cmd --sort=-%mem | head -10
+
+                echo ""
+                echo "===== TOP CPU PROCESSES ====="
+                ps -eo pid,user,%cpu,%mem,cmd --sort=-%cpu | head -10
+                '''
+            }
+        }
+    }
+}
