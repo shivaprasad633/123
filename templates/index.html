@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chrome Dino Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Docker Dino Game</h1>
+
+<div id="score">Score: 0</div>
+
+<div id="game">
+    <div id="dino">🦖</div>
+    <div id="cactus">🌵</div>
+
+    <div id="gameOver">
+        <h2>Game Over</h2>
+        <button onclick="restartGame()">Restart</button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
